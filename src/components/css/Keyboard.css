@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+}
+
+.keyboard {
+  height: 222px;
+  width: 692px;
+  border: 1px solid black;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}

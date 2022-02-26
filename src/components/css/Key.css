@@ -1,0 +1,26 @@
+* {
+  box-sizing: border-box;
+}
+
+.key {
+  height: 40px;
+  position: relative;
+  text-align: center;
+  border: 1px solid black;
+  font-size: 1.3rem;
+  margin: 2px;
+  transition: 0.2s;
+}
+
+.key-shift {
+  font-size: 0.9rem;
+  height: 10px;
+  width: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.colored {
+  background: tomato;
+}
