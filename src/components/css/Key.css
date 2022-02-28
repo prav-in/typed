@@ -1,14 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap");
+
 * {
   box-sizing: border-box;
 }
 
 .key {
-  height: 40px;
+  height: 42px;
   position: relative;
   text-align: center;
-  border: 1px solid black;
+  border: 1px solid gray;
   font-size: 1.3rem;
   margin: 2px;
+  background: white;
+  font-family: "Titillium Web", sans-serif;
+  border-radius: 2px;
   transition: 0.2s;
 }
 
@@ -22,5 +27,24 @@
 }
 
 .colored {
-  background: tomato;
+  transform: scale(0.9);
+  background: gray;
+}
+
+.github {
+  background: lightgray;
+  color: black;
+  transition: 0.4s;
+}
+
+.github:hover {
+  background: black;
+  color: white;
+}
+
+.github a:visited {
+  color: black;
+}
+.github:hover a:visited {
+  color: white;
 }

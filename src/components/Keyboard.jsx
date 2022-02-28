@@ -1,6 +1,19 @@
 import React from "react";
 import Key from "./Key";
 import "./css/Keyboard.css";
+import { AiFillGithub } from "react-icons/ai";
+import { useState } from "react";
+
+const gitElement = (
+  <a
+    href="https://github.com/prav-in"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <AiFillGithub />
+  </a>
+);
+
 const row1 = [
   ["`", 192, "~"],
   ["1", 49, "!"],
@@ -35,19 +48,19 @@ const row2 = [
   ["\\", 220, "|", "65px"],
 ];
 const row3 = [
-  ["", "CAPS", 20, "82px"],
-  ["", "A", 65, ""],
-  ["", "S", 83, ""],
-  ["", "D", 68, ""],
-  ["", "F", 70, ""],
-  ["", "G", 71, ""],
-  ["", "H", 72, ""],
-  ["", "J", 74, ""],
-  ["", "K", 75, ""],
-  ["", "L", 76, ""],
-  [":", ";", 186, ""],
-  ['"', "'", 222, ""],
-  ["", "Enter", 13, "94px"],
+  ["CAPS", 20, "", "82px"],
+  ["A", 65],
+  ["S", 83],
+  ["D", 68],
+  ["F", 70],
+  ["G", 71, "", "", gitElement],
+  ["H", 72],
+  ["J", 74],
+  ["K", 75],
+  ["L", 76],
+  [";", 186, ":", ""],
+  ["'", 222, '"', ""],
+  ["Enter", 13, "", "94px"],
 ];
 const row4 = [
   ["Shift", 16, "", "111px", "ShiftLeft"],
@@ -71,16 +84,24 @@ const row5 = [
   ["", 32, "288px"],
   ["ALT", 18, "50px", "AltRight"],
   ["Win", 91, "50px", "MetaRight"],
-  ["Pg", 93, "50px", "ContextMenu"],
+  ["Mnu", 93, "50px", "ContextMenu"],
   ["CTRL", 17, "60px", "ControlRight"],
 ];
 
 export default function Keyboard({ keyCode, code }) {
+  // hooks
+  const [showGithub, setShowGithub] = useState(false);
+
   return (
-    <div className="keyboard">
+    <div
+      onMouseEnter={() => setShowGithub(true)}
+      onMouseLeave={() => setShowGithub(false)}
+      className="keyboard"
+    >
       <div className="keyboard-row">
         {row1.map((key) => (
           <Key
+            key={key[1]}
             cl={keyCode === key[1]}
             shiftKey={key[2]}
             keyName={key[0]}
@@ -91,6 +112,7 @@ export default function Keyboard({ keyCode, code }) {
       <div className="keyboard-row">
         {row2.map((key) => (
           <Key
+            key={key[1]}
             cl={keyCode === key[1]}
             shiftKey={key[2]}
             keyName={key[0]}
@@ -101,9 +123,10 @@ export default function Keyboard({ keyCode, code }) {
       <div className="keyboard-row">
         {row3.map((key) => (
           <Key
-            cl={keyCode === key[2]}
-            shiftKey={key[0]}
-            keyName={key[1]}
+            key={key[1]}
+            cl={keyCode === key[1]}
+            shiftKey={key[2]}
+            keyName={showGithub && key[4] ? key[4] : key[0]}
             width={key[3] || "42px"}
           />
         ))}
@@ -111,6 +134,7 @@ export default function Keyboard({ keyCode, code }) {
       <div className="keyboard-row">
         {row4.map((key) => (
           <Key
+            key={key[4] ? key[4] : key[1]}
             cl={key[4] ? code === key[4] : keyCode === key[1]}
             shiftKey={key[2]}
             keyName={key[0]}
@@ -121,6 +145,7 @@ export default function Keyboard({ keyCode, code }) {
       <div className="keyboard-row">
         {row5.map((key) => (
           <Key
+            key={key[3] ? key[3] : key[1]}
             cl={key[3] ? code === key[3] : keyCode === key[1]}
             keyName={key[0]}
             width={key[2]}

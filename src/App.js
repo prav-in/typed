@@ -4,23 +4,25 @@ import { useEffect, useState } from "react";
 
 function App() {
   // hooks
-
   const [keyCode, setKeyCode] = useState();
   const [code, setCode] = useState();
-  const [text, setText] = useState(null);
+  const [text, setText] = useState("");
   const [value, setValue] = useState();
   const [time, setTime] = useState();
   const [typeWrong, setTypeWrong] = useState(false);
+  const [wrongCount, setWrongCount] = useState(0);
+
+  const completed = value === text;
 
   useEffect(() => {
-    if (value === text) {
-      console.log("Rond");
+    setTypeWrong(false);
+    if (completed) {
       setTime((prevTime) => {
         const endTime = performance.now();
-        return (endTime - prevTime) / 1000;
+        return (endTime - prevTime) / 60000;
       });
     }
-  }, [value, text]);
+  }, [completed, text]);
 
   // functions
 
@@ -34,11 +36,12 @@ function App() {
       setValue(e.target.value);
     } else {
       setTypeWrong(true);
+      setWrongCount((prevCount) => prevCount + 1);
     }
   };
 
   const handleStart = () => {
-    setTypeWrong(false);
+    setWrongCount(0);
     setValue("");
     setText(generateRandomText());
   };
@@ -46,13 +49,12 @@ function App() {
   const generateRandomText = () => {
     const arr = [];
 
-    for (let i = 0; i < 10; i++) {
-      const rand = Math.round(Math.random() * 34) + 97;
+    for (let i = 0; i < 135; i++) {
+      const rand = Math.round(Math.random() * 40) + 97;
       rand > 122 ? arr.push(32) : arr.push(rand);
     }
-
-    console.log(String.fromCharCode(...arr));
-    return String.fromCharCode(...arr);
+    const randText = String.fromCharCode(...arr).trim();
+    return randText.replace(/  +/g, " ");
   };
 
   const handleKeyDown = (e) => {
@@ -60,26 +62,49 @@ function App() {
     setCode((prevCode) => e.code);
   };
 
+  const getTypingSpeed = () => {
+    return Math.round(text.length / (5 * time));
+  };
+
+  const getAccuracy = () => {
+    return Math.round(((text.length - wrongCount) / text.length) * 100);
+  };
+
   return (
     <div className="App">
-      <div>
-        {typeWrong && <h1>Wrong</h1>}
-        <h1>{text}</h1>
+      <h1 className="heading">Check Your Typing Speed</h1>
+      <button className="btn" onClick={handleStart}>
+        <span className="btn-text">{text ? "START OVER" : "START"}</span>
+      </button>
+      <div className="container">
+        <div className="text-container">{text}</div>
+        <div
+          className={typeWrong ? "input-container wrong" : "input-container"}
+        >
+          {text && <p>Type The Above Paragraph Here</p>}
+          <input
+            spellcheck="false"
+            disabled={completed && keyCode === null}
+            value={value}
+            type="text"
+            onKeyDown={handleKeyDown}
+            onKeyUp={() => {
+              setKeyCode(null);
+              setCode(null);
+            }}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="result-container">
+          {completed && (
+            <p>
+              Speed : {getTypingSpeed()} WPM
+              <span className="seperator">|</span> Accuracy : {getAccuracy()} %
+            </p>
+          )}
+        </div>
+        <Keyboard code={code} keyCode={keyCode} />
       </div>
-      <input
-        disabled={value === text && keyCode === null}
-        value={value}
-        type="text"
-        onKeyDown={handleKeyDown}
-        onKeyUp={() => {
-          setKeyCode(null);
-          setCode(null);
-        }}
-        onChange={handleChange}
-      />
-      {value === text && <h1>Completed in {time} sec</h1>}
-      <Keyboard code={code} keyCode={keyCode} />
-      <button onClick={handleStart}> Start</button>
     </div>
   );
 }

@@ -7,7 +7,12 @@ export default function Key({ width, shiftKey, keyName, cl }) {
   // functions
 
   return (
-    <button className={cl ? "colored key" : "key"} style={{ width: width }}>
+    <button
+      className={`key ${cl ? "colored " : ""} ${
+        typeof keyName === "object" ? "github" : ""
+      }`}
+      style={{ width: width }}
+    >
       {shiftKey && <div className="key-shift">{shiftKey}</div>}
       {keyName}
     </button>
