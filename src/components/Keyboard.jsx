@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const gitElement = (
   <a
-    href="https://github.com/prav-in"
+    href="https://github.com/prav-in/typed"
     target="_blank"
     rel="noopener noreferrer"
   >
@@ -28,11 +28,11 @@ const row1 = [
   ["0", 48, ")"],
   ["-", 189, "_"],
   ["=", 187, "+"],
-  ["BACK", 8, "", "88px"],
+  ["BACK", 8, "", "109px"],
 ];
 
 const row2 = [
-  ["TAB", 9, "", "65px"],
+  ["TAB", 9, "", "80px"],
   ["Q", 81],
   ["W", 87],
   ["E", 69],
@@ -45,10 +45,10 @@ const row2 = [
   ["P", 80],
   ["[", 219, "{"],
   ["]", 221, "}"],
-  ["\\", 220, "|", "65px"],
+  ["\\", 220, "|", "80px"],
 ];
 const row3 = [
-  ["CAPS", 20, "", "82px"],
+  ["CAPS", 20, "", "103px"],
   ["A", 65],
   ["S", 83],
   ["D", 68],
@@ -60,10 +60,10 @@ const row3 = [
   ["L", 76],
   [";", 186, ":", ""],
   ["'", 222, '"', ""],
-  ["Enter", 13, "", "94px"],
+  ["Enter", 13, "", "114px"],
 ];
 const row4 = [
-  ["Shift", 16, "", "111px", "ShiftLeft"],
+  ["Shift", 16, "", "137px", "ShiftLeft"],
   ["Z", 90],
   ["X", 88],
   ["C", 67],
@@ -74,18 +74,18 @@ const row4 = [
   [",", 188, "<"],
   [".", 190, ">"],
   ["/", 191, "?"],
-  ["Shift", 16, "", "111px", "ShiftRight"],
+  ["Shift", 16, "", "137px", "ShiftRight"],
 ];
 
 const row5 = [
-  ["CRTL", 17, "60px", "ControlLeft"],
-  ["Win", 91, "50px", "MetaLeft"],
-  ["ALT", 18, "50px", "AltLeft"],
-  ["", 32, "288px"],
-  ["ALT", 18, "50px", "AltRight"],
-  ["Win", 91, "50px", "MetaRight"],
-  ["Mnu", 93, "50px", "ContextMenu"],
-  ["CTRL", 17, "60px", "ControlRight"],
+  ["CRTL", 17, "72px", "ControlLeft"],
+  ["Win", 91, "62px", "MetaLeft"],
+  ["ALT", 18, "62px", "AltLeft"],
+  ["", 32, "356px"],
+  ["ALT", 18, "62px", "AltRight"],
+  ["Win", 91, "62px", "MetaRight"],
+  ["Mnu", 93, "62px", "ContextMenu"],
+  ["CTRL", 17, "72px", "ControlRight"],
 ];
 
 export default function Keyboard({ keyCode, code }) {
@@ -105,7 +105,7 @@ export default function Keyboard({ keyCode, code }) {
             cl={keyCode === key[1]}
             shiftKey={key[2]}
             keyName={key[0]}
-            width={key[3] || "42px"}
+            width={key[3] || "52px"}
           />
         ))}
       </div>
@@ -116,7 +116,7 @@ export default function Keyboard({ keyCode, code }) {
             cl={keyCode === key[1]}
             shiftKey={key[2]}
             keyName={key[0]}
-            width={key[3] || "42px"}
+            width={key[3] || "52px"}
           />
         ))}
       </div>
@@ -127,7 +127,7 @@ export default function Keyboard({ keyCode, code }) {
             cl={keyCode === key[1]}
             shiftKey={key[2]}
             keyName={showGithub && key[4] ? key[4] : key[0]}
-            width={key[3] || "42px"}
+            width={key[3] || "52px"}
           />
         ))}
       </div>
@@ -138,7 +138,7 @@ export default function Keyboard({ keyCode, code }) {
             cl={key[4] ? code === key[4] : keyCode === key[1]}
             shiftKey={key[2]}
             keyName={key[0]}
-            width={key[3] || "42px"}
+            width={key[3] || "52px"}
           />
         ))}
       </div>
